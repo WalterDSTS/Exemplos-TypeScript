@@ -12,16 +12,16 @@ export class Negociacao {
   // ou:
   //
   // constructor(
-  //   private readonly data: Date, 
-  //   private readonly quantidade: number, 
+  //   private readonly data: Date,
+  //   private readonly quantidade: number,
   //   private readonly valor: number
   // ) {}
   //
   // ou :
 
   constructor(
-    private _data: Date, 
-    private _quantidade: number, 
+    private _data: Date,
+    private _quantidade: number,
     private _valor: number
   ) {}
 
@@ -37,8 +37,21 @@ export class Negociacao {
   get valor(): number {
     return this._valor;
   }
-  
+
   get volume(): number {
     return this.quantidade * this.valor;
+  }
+
+  public static criaDe(
+    dataString: string,
+    quantidadeString: string,
+    valorString: string
+  ): Negociacao {
+    const exp = /-/g;
+    const date = new Date(dataString.replace(exp, ","));
+    const quantidade = parseInt(quantidadeString);
+    const valor = parseFloat(valorString);
+
+    return new Negociacao(date, quantidade, valor);
   }
 }
